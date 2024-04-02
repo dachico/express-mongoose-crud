@@ -2,11 +2,13 @@ import express from "express";
 import morgan from "morgan";
 import log from "@ajar/marker";
 import cors from "cors";
+import dotenv from "dotenv";
 
 import { connect_db } from "./db/mongoose.connection.mjs";
 import user_router from "./modules/user/user.router.mjs";
 import { error_handler, not_found } from "./middleware/errors.handler.mjs";
 
+dotenv.config({ path: "../.env" });
 const { PORT, HOST, DB_URI } = process.env;
 
 const app = express();
