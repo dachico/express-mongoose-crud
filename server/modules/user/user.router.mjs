@@ -30,15 +30,17 @@ router.post(
   raw(async (req, res) => {
     log.obj(req.body, "create a user, req.body:");
     const { error, value } = userValid.validate(req.body);
-    const user = await user_model.create(req.body);
+
     if (error) {
       //added just to make sure if its working or not raw takes care of errors
       console.log(error);
       return res.send(
         "Invalid request, must specify first_name, last_name, email, and phone number."
       );
+    } else {
+      const user = await user_model.create(req.body);
+      res.status(200).json(user);
     }
-    res.status(200).json(user);
   })
 );
 
